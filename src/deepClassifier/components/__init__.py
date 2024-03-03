@@ -1,1 +1,2 @@
 from deepClassifier.components.data_ingestion import DataIngestion
+from deepClassifier.components.base_model_creation import PrepareBaseModel
