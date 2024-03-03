@@ -1,2 +1,5 @@
 from deepClassifier.components.data_ingestion import DataIngestion
 from deepClassifier.components.base_model_creation import PrepareBaseModel
+from deepClassifier.components.callback_creation import PrepareCallback
+from deepClassifier.components.evaluation import Evaluation
+from deepClassifier.components.training import Training
