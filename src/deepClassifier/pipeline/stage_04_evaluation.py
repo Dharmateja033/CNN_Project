@@ -1,6 +1,6 @@
-from deepClassifier.config import ConfigurationManager
-from deepClassifier.components import Evaluation
-from deepClassifier import logger
+from deepclassifier.config import ConfigurationManager
+from deepclassifier.components import Evaluation
+from deepclassifier import logger
 
 STAGE_NAME = "Evaluation stage"
 
