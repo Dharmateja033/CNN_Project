@@ -165,3 +165,7 @@ cython_debug/
 *.jpg
 *.zip
 /artifacts
+artifacts/prepare_base_model/base_model_updated.h5
+artifacts/prepare_base_model/base_model.h5
+artifacts/prepare_base_model/base_model_updated.h5
+artifacts/prepare_base_model/base_model.h5
