@@ -5,29 +5,16 @@ from pathlib import Path
 class Training:
     def __init__(self, config: TrainingConfig):
         self.config = config
-        self.model = None  # Initialize the model attribute
-        
+
     def get_base_model(self):
         self.model = tf.keras.models.load_model(
-            self.config.updated_base_model_path,
-            compile=False
+            self.config.updated_base_model_path
         )
-        
-        
-        # Recreate the optimizer
-        optimizer = tf.keras.optimizers.SGD(learning_rate=0.01)
-        
-        # Compile the model with the new optimizer
-        self.model.compile(
-            optimizer=optimizer,
-            loss='categorical_crossentropy',  # Adjust to your specific loss function
-            metrics=['accuracy']  # Adjust to your specific metrics
-        )
-        
-        
+
     def train_valid_generator(self):
+
         datagenerator_kwargs = dict(
-            rescale=1./255,
+            rescale = 1./255,
             validation_split=0.20
         )
 
@@ -72,17 +59,17 @@ class Training:
     def save_model(path: Path, model: tf.keras.Model):
         model.save(path)
 
-    def train(self, callback_list: list):
-        if self.model is None:
-            self.get_base_model()  # Ensure the model is loaded and compiled
 
+    def train(self, callback_list: list):
         self.steps_per_epoch = self.train_generator.samples // self.train_generator.batch_size
+        self.validation_steps = self.valid_generator.samples // self.valid_generator.batch_size
 
         self.model.fit(
             self.train_generator,
             epochs=self.config.params_epochs,
             steps_per_epoch=self.steps_per_epoch,
-            validation_data=self.valid_generator,  # Pass the generator directly
+            validation_steps=self.validation_steps,
+            validation_data=self.valid_generator,
             callbacks=callback_list
         )
 
